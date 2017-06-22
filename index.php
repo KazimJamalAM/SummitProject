@@ -39,7 +39,7 @@
 						<span>Internal or External Customer</span>
 					</div>
 					</a>
-					<a href="#">
+					<a href="datacenterLogin.php">
 					<div class="box">
 						<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 							<line class="top" x1="0" y1="0" x2="900" y2="0"/>
@@ -52,7 +52,7 @@
 						<span>Commercial or IT</span>
 					</div>
 					</a>
-					<a href="#">
+					<a href="corporateLogin.php">
 					<div class="box">
 						<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 							<line class="top" x1="0" y1="0" x2="900" y2="0"/>
