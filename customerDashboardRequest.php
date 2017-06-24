@@ -31,6 +31,15 @@
 
 <body>
 
+
+
+
+<?php
+
+
+
+?>
+
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -105,55 +114,55 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <form role="form">
+                        <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
                             <div class="form-group">
                                 <label>Name</label>
-                                <input class="form-control">
+                                <input class="form-control" name="name">
                                 <p class="help-block">In case of more than one name, kindly use commas.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>NIC</label>
-                                <input class="form-control">
+                                <input class="form-control" name="nic">
                                 <p class="help-block">In case of more than one NIC, use commas.</p>
                             </div>
 
                             <div class="form-group">
                                 <label>Company</label>
-                                <input class="form-control">
+                                <input class="form-control" name="company">
                             </div>
 
                             <div class="form-group">
                                 <label>Date</label>
-                                <input class="form-control" type="date">
+                                <input class="form-control" type="date" name="date">
                             </div>
 
                             <div class="form-group">
                             	<div class="row">
                             		<div class="col-lg-6">
                                 		<label>Time in</label>
-		                                <input class="form-control" type="Time">
+		                                <input class="form-control" type="Time" name="timein">
                             		</div>
                             		<div class="col-lg-6">
                                 		<label>Time Out</label>
-		                                <input class="form-control" type="Time">
+		                                <input class="form-control" type="Time" name="timeout">
                             		</div>
                             	</div>
 
                             <div class="form-group">
                                 <label>Work Details</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" name="workdetails"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>Equipments Accompanied</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" name="equipments"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>Servers/Equipments/ACs Unit, etc to be worked on</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" name="workedon"></textarea>
                             </div>
 
                             <div class="form-group">
