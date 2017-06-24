@@ -109,22 +109,44 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Request generated for: </th>
-                                        <th>Request generated on:</th>
+                                        <th>Request ID:</th>
+                                        <th>Request generated for:</th>
+                                        <th>Request generated on date:</th>
+                                        <th>Request generated on time:</th>
                                         <th>Status:</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Commercial Data Center Karachi</td>
-                                        <td>22nd June 2017</td>
-                                        <td>Awaiting approval from KAM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IT Data Center Karachi</td>
-                                        <td>17th June 2017</td>
-                                        <td>Approved</td>
-                                    </tr>
+                                    <?php
+                                        //database access
+                                        $servername = "localhost";
+                                        $user = "root";
+                                        $pass = "";
+                                        $dbname = "datacenter";
+
+                                        //establishing connection
+                                        $conn = new mysqli($servername, $user, $pass, $dbname);
+
+                                        if($conn -> connect_error){
+                                            die("Connection Failed: ". $conn->connect_error);
+                                        }
+                                        echo("Connection Successful");
+                                        $sql = "SELECT id, requestfor, requestdate, requesttime, status FROM customerrequest LIMIT 10";
+                                        $result = $conn->query($sql);
+
+                                        if($result->num_rows > 0){
+                                            while($row = $result->fetch_assoc()){ ?>
+                                                    <tr>
+                                                        <td><?php echo $row["id"] ?></td>
+                                                        <td><?php echo $row["requestfor"] ?></td>
+                                                        <td><?php echo $row["requestdate"] ?></td>
+                                                        <td><?php echo $row["requesttime"] ?></td>
+                                                        <td><?php echo $row["status"] ?></td>
+                                                    </tr>
+                                            <?php
+                                            }
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

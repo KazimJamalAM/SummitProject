@@ -36,7 +36,53 @@
 
 <?php
 
+    $name = $nic = $company = $requestedDate = $timein = $timeout = $workdetails = $equipments = $workedon = $requestDate = $requestTime = $requestfor = "";
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $name = $_POST["name"];
+        $nic = $_POST["nic"];
+        $company = $_POST["company"];
+        $requestedDate = $_POST["date"];
+        $timein = $_POST["timein"];
+        $timeout = $_POST["timeout"];
+        $workdetails = $_POST["workdetails"];
+        $equipments = $_POST["equipments"];
+        $workedon = $_POST["workedon"];
+        $shutdown = $_POST["shutdown"];
+        $software = $_POST["software"];
+        $hardware = $_POST["hardware"];
+        $maintanence = $_POST["maintanence"];
+        $requestfor = $_POST["requestfor"];
+        $status = "Awaiting approval from KAM";
+
+        date_default_timezone_set("Asia/Karachi");
+        $requestDate = date("Y/m/d");
+        $requestTime = date("h:i:sa");
+
+        //database access
+        $servername = "localhost";
+        $user = "root";
+        $pass = "";
+        $dbname = "datacenter";
+
+        //establishing connection
+        $conn = new mysqli($servername, $user, $pass, $dbname);
+
+        if($conn -> connect_error){
+            die("Connection Failed: " . $conn->connect_error);
+        }
+        echo "Connection Successful";
+
+        $sql = "INSERT INTO customerrequest (requestfor, requesttime, requestdate, name, nic, company, requesteddate, timein, timeout, workdetails, equipments, workedon, shutdown, software, hardware, maintanence, status) VALUES ('".$requestfor."','".$requestTime."', '".$requestDate."', '".$name."', '".$nic."', '".$company."', '".$requestedDate."', '".$timein."', '".$timeout."', '".$workdetails."', '".$equipments."', '".$workedon."', '".$shutdown."', '".$software."', '".$hardware."', '".$maintanence."', '".$status."')";
+        if($conn->query($sql)===TRUE){
+            echo "New Row added Successfully";
+        }
+        else {
+            print_r( "Error: " . $sql . "<br>" . $conn->error); exit();
+        }
+
+        $conn -> close();
+    }
 
 ?>
 
@@ -113,8 +159,16 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-
                         <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+
+                            <div class="form-group">
+                                <label>Request for</label>
+                                <select class="form-control" name="requestfor">
+                                    <option value="Commecial Data Center Karachi">Commercial Data Center Karachi</option>
+                                    <option value="IT Data Center Karachi">IT Data Center Karachi</option>
+                                    <option value="Commecial Data Center Lahore">Commercial Data Center Lahore</option>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label>Name</label>
@@ -169,12 +223,12 @@
                                 <label>Server Shutdown Required</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Yes
+                                        <input type="radio" name="shutdown" value="Yes" checked>Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">No
+                                        <input type="radio" name="shutdown" value="No">No
                                     </label>
                                 </div>
                             </div>
@@ -183,12 +237,12 @@
                                 <label>Software Installation</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios1" id="optionsRadios3" value="option3" checked>Yes
+                                        <input type="radio" name="software" value="Yes" checked>Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios1" id="optionsRadios4" value="option4">No
+                                        <input type="radio" name="software" value="No">No
                                     </label>
                                 </div>
                             </div>
@@ -197,12 +251,12 @@
                                 <label>Hardware Installation/Replacement</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios2" id="optionsRadios5" value="option5" checked>Yes
+                                        <input type="radio" name="hardware" value="Yes" checked>Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios2" id="optionsRadios6" value="option6">No
+                                        <input type="radio" name="hardware" value="No">No
                                     </label>
                                 </div>
                             </div>
@@ -211,12 +265,12 @@
                                 <label>Servers/Equipment Maintanence Activity</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios3" id="optionsRadios7" value="option8" checked>Yes
+                                        <input type="radio" name="maintanence" value="Yes" checked>Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios3" id="optionsRadios8" value="option8">No
+                                        <input type="radio" name="maintanence" value="No">No
                                     </label>
                                 </div>
                             </div>
