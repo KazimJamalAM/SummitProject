@@ -134,6 +134,8 @@
     	$username = $password = ""; //initializing variable
 
     	if($_SERVER["REQUEST_METHOD"] == "POST"){
+    		session_start();
+    		$_SESSION['user'] = "";
     		$username = $_POST["username"]; //inserting values into variable from form
     		$password = $_POST["password"]; //inserting values into variable from form
 
@@ -159,7 +161,8 @@
 	    			// echo "id:". $row["ID"]. "-Username: ".$row["username"]. "-Password: ".$row["password"]. "-Name: ".$row["name"];
 	    			if($username == $row["username"]){
 	    				echo "Username Successful";
-	    				if ($password == $row["password"]) {
+	    				if ($password == $row["password"]) {	    					
+	    					$_SESSION['user'] = $row["name"];
 	    					header("Location: corporateDashboard.php"); //to the dashboard
 	    					exit();
 	    				}

@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if($_SESSION['user']==""){
+        header("Location: index.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome Customer</title>
+    <title>Welcome <?php echo $_SESSION['user']?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +56,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Customer Name <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user']?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -61,7 +69,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -104,7 +112,6 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Bordered with Striped Rows</h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
@@ -131,6 +138,7 @@
                                             die("Connection Failed: ". $conn->connect_error);
                                         }
                                         echo("Connection Successful");
+                                        echo($_SESSION['user']);
                                         $sql = "SELECT id, requestfor, requestdate, requesttime, status FROM customerrequest LIMIT 10";
                                         $result = $conn->query($sql);
 

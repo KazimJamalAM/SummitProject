@@ -134,6 +134,8 @@
     	$username = $password = ""; //initializing variable
 
     	if($_SERVER["REQUEST_METHOD"] == "POST"){
+    		session_start();
+    		$_SESSION['user'] = "";
     		$username = $_POST["username"]; //inserting values into variable from form
     		$password = $_POST["password"]; //inserting values into variable from form
 
@@ -160,6 +162,7 @@
 	    			if($username == $row["username"]){
 	    				echo "Username Successful";
 	    				if ($password == $row["password"]) {
+	    					$_SESSION['user'] = $row["name"];
 	    					header("Location: dcDashboard.php"); //to the dashboard
 	    					exit();
 	    				}
